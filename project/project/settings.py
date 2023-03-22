@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'main.apps.MainConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,9 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'user.CustomUser'
+
 
 
 # Static files (CSS, JavaScript, Images)
