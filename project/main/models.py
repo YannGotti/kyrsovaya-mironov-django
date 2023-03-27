@@ -1,6 +1,6 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
-from user.models import Client, Employee
+from user.models import CustomUser
 
 class Product(models.Model):
     title = models.CharField('Название', max_length=100)
@@ -38,7 +38,6 @@ class Photo_product(models.Model):
     photo = models.ImageField('Фото товара', upload_to='product_photos/', blank=True, null=True)
 
 class Order(models.Model):
-    employee = models.ForeignKey(Employee, verbose_name='К какому сотруднику привязан', on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, verbose_name='К какому клиенту привязан', on_delete=models.CASCADE)
+    employee = models.ForeignKey(CustomUser, verbose_name='К какому сотруднику привязан', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, verbose_name= 'К какому товару привязан', on_delete=models.CASCADE)
     date_order = models.DateField('Дата создания товара', auto_now=True)

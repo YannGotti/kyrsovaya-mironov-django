@@ -67,9 +67,18 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u1961182_yion-db',
+        'USER': 'u1961182_root',
+        'PASSWORD': 'pV3eB3gH0diS1tQ4',
+        'HOST': '31.31.198.99',
+        'PORT': '3306',
+
+        'OPTIONS' : {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    },
+    
 }
 
 
