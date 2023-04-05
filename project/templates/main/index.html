@@ -7,7 +7,7 @@
 <section>
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
 
                 
 
@@ -25,13 +25,13 @@
                           </div>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3 me-2">
                         <button class="btn btn-dark dropdown-toggle text-button" type="button">
                             Еще что то
                         </button>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3 me-2">
                         <button class="btn btn-dark dropdown-toggle text-button" type="button">
                             Еще что то
                         </button>
@@ -39,127 +39,57 @@
                 </div>
 
                 <div class="row d-flex justify-content-start mt-5">
-                    <div class="col-4">
-                        <h1 class="text-h1">Мыши 3 товара</h1>
+                    <div class="col-6">
+                        <h1 class="text-h2" id="count_product">Всего товара - 0 штук</h1>
                     </div>
                 </div>
 
                 
-
-                <div class="row d-flex justify-content-center mt-3 shadow p-1" style="border-radius: 10px;">
-                    <div class="col-3">
-                        <a href="#"><img src="{% static 'image/main/mouse.jpg' %}" width="100%" alt=""></a>
-                    </div>
-
-                    <div class="col-7">
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="#" class="text-a wrap text-dark">Мышь проводная Aceline CM-408BU черный [800 dpi, светодиодный, USB Type-A, кнопки - 3]</a>
-                            </div>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <h3 class="text-h3">В наличии: 28</h3>
-                            </div>
-                            <div class="col-6">
-                                <h3 class="text-h3">Артикул: <a href="#">093452345</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="row d-flex justify-content-end mt-2">
-                            <div class="col-12">
-                                <h3 class="text-h1 text-dark">5 009р</h3>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center mt-3">
-                                <button type="button" class="btn btn-dark text-button">Изменить товар</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="products" id="product_list">
+                    
+    
                 </div>
-
-                <div class="row d-flex justify-content-center mt-5 shadow p-1" style="border-radius: 10px;">
-                    <div class="col-3">
-                        <a href="#"><img src="{% static 'image/main/mouse2.jpg' %}" width="100%" alt=""></a>
-                    </div>
-
-                    <div class="col-7">
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="#" class="text-a wrap text-dark">Мышь проводная HyperX Pulsefire Surge RGB [4P5Q1AA] черный [16000 dpi, светодиодный, USB Type-A, кнопки - 6]</a>
-                            </div>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <h3 class="text-h3">В наличии: 2</h3>
-                            </div>
-                            <div class="col-6">
-                                <h3 class="text-h3">Артикул: <a href="#">023423345</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="row d-flex justify-content-end mt-2">
-                            <div class="col-12">
-                                <h3 class="text-h1 text-dark">5 009р</h3>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center mt-3">
-                                <button type="button" class="btn btn-dark text-button">Изменить товар</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row d-flex justify-content-center mt-5 shadow p-1" style="border-radius: 10px;">
-                    <div class="col-3">
-                        <a href="#"><img src="{% static 'image/main/mouse.jpg' %}" width="100%" alt=""></a>
-                    </div>
-
-                    <div class="col-7">
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="#" class="text-a wrap text-dark">Мышь проводная Aceline CM-408BU черный [800 dpi, светодиодный, USB Type-A, кнопки - 3]</a>
-                            </div>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <h3 class="text-h3">В наличии: 28</h3>
-                            </div>
-                            <div class="col-6">
-                                <h3 class="text-h3">Артикул: <a href="#">093452345</a></h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="row d-flex justify-content-end mt-2">
-                            <div class="col-12">
-                                <h3 class="text-h1 text-dark">5 009р</h3>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center mt-3">
-                                <button type="button" class="btn btn-dark text-button">Изменить товар</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+                
 
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
+                <div class="row d-flex justify-content-start mt-5">
+                    <div class="col-12">
+                        <h1 class="text-h2 text-center">Добавить товар</h1>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="col-10 col-lg-8">
+                        <form onsubmit="return false;" id="form_create_product" method="POST" enctype="multi-part/formdata">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-h3">Имя товара</label>
+                                <input name="title" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="exampleInputEmail1" class="form-label text-h3">Описание товара</label>
+                                <input name="description" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="exampleInputEmail1" class="form-label text-h3">Цена товара</label>
+                                <input name="price" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="exampleInputEmail1" class="form-label text-h3">Тип товара</label>
+                                <input name="type" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="exampleInputEmail1" class="form-label text-h3">Количество товара</label>
+                                <input name="count" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="exampleInputEmail1" class="form-label text-h3">Артикул товара</label>
+                                <input name="articul" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                                <label for="formFile" class="form-label text-h3">Фото товара</label>
+                                <input name="image" class="form-control text-h3" id="file_loader" type="file" id="formFile">
+                            </div>
+                            
+                            
+                            <button onclick="createProduct()" type="submit" class="btn btn-dark text-h2">Добавить</button>
+                          </form>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -167,5 +97,21 @@
 </section>
 
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+        <img src="{% static 'image/base/logo.svg' %}" class="rounded me-2" width="15px">
+        <strong class="me-auto text-h3">YION</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-h3" id="toast_content">
+        
+        </div>
+    </div>
+</div>
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'js/main/templates.js' %}"></script>
+
 {% endblock %}

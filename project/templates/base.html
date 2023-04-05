@@ -34,13 +34,12 @@
 
                 <div class="collapse navbar-collapse  mx-2" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <button type="button" class="btn btn-outline-light text-dark text-button mx-2">Документация</button>
                         <button type="button" class="btn btn-outline-light text-dark text-button mx-2" id="navbarNavAltMarkup">API</button>
                     </div>
                 </div>
 
-                <a href="/admin"><img src="media/{{ user.photo_profile }}" width="40" height="40" alt="" style="border-radius: 30px;"></a>
-                <a href="/admin" type="button" class="btn btn-dark text-button mx-3">Админ панель</a>
+                <a href="/admin"><img src="media/{{ user.photo_profile }}" width="35" height="35" alt="" style="border-radius: 30px;"></a>
+
             {% endif %}
 
         </div>
@@ -51,21 +50,47 @@
     {% else %}
         <div class="container mt-5">
              <div class="row d-flex justify-content-center">
-                <div class="col-6">
-                    <h1 class="text-h1">Для доступа к сайту необходимо авторизироваться!</h1>
-                </div>
-             </div>
+                <div class="col-10 col-lg-5">
+                    <h5 class="text-h1">Вход</h5>
+                    <form class="mt-3" name="login_form" id="login_form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="text-h2">Логин</label>
+                            <input name ="username" type="username" class="form-control">
+                            <div class="form-text">Ваш никнейм выданный администратором.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="text-h2">Пароль</label>
+                            <input name="password" type="password" class="form-control">
+                            <div class="form-text">Ваш пароль выданный администратором.</div>
+                        </div>
 
-             <div class="row d-flex justify-content-center">
-                <div class="col-1 mt-2">
-                    <a href="/admin" type="button" class="btn btn-dark text-button">Войти</a>
+                        <h5 class="text-danger form-text mt-2 mb-2">{% if error_reg != None %}{{ error_reg }}{% endif %}</h5>
+
+                        <button type="submit" class="btn btn-dark text-button text-h1 mt-1" value="login">Войти</button>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </form>
                 </div>
              </div>
         </div>
     {% endif %}
+
+
+    <div id="csrf_token">
+        {% csrf_token %}
+    </div>
+
+    <script>
+        let csrf_token = document.getElementById('csrf_token').children[0];
+        document.cookie = "csrftoken="+ csrf_token.value +"; path=/;"
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="{% static 'js/base/bootstrap.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/main/ajax.js' %}"></script>
 
 </body>
 </html>

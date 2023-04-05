@@ -5,27 +5,15 @@ from user.models import CustomUser
 class Product(models.Model):
     title = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
+   
 
-    types = [
-        (1, 'Ноутбуки'),
-        (2, 'Персональные компьютеры'),
-        (3, 'Моноблоки'),
-        (4, 'Мониторы'),
-        (5, 'Клавиатуры'),
-        (6, 'Мыши'),
-        (7, 'Комплекты клавиатура+мышь'),
-        (8, 'Игровые наборы'),
-        (9, 'Видеокамеры'),
-        (10, 'Наушники'),
-        (11, 'Колонки')
-    ]
-
-    type = models.IntegerField('Тип', choices=types)
-    parametrs = models.JSONField('Характеристики', null=True)
-    price = MoneyField(max_digits=14, decimal_places=2, default_currency='RU')
-    availability = models.BooleanField('Есть ли товар?', default=False)
+    type = models.CharField('Тип', max_length=150)
+    parametrs = models.JSONField('Характеристики',null=True, default=list)
+    price = MoneyField(max_digits=14, decimal_places=2, default_currency='RUB')
+    availability = models.BooleanField('Есть ли товар?', default=True)
     count = models.BigIntegerField('Кол-во товара', default=0, null=True)
     date_create = models.DateField('Дата добавления', auto_now=True)
+    articul = models.IntegerField('Артикул')
 
     def __str__(self):
         return f'{self.title}, {self.description}, {self.type}, {self.availability}'

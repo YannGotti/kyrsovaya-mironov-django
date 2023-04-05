@@ -1,6 +1,10 @@
 from django.contrib import admin
-#from .models import FilmsOnMainPage
+from .models import Product, Photo_product
 
-#@admin.register(FilmsOnMainPage)
-#class FilmsOnMainPageAdminPanel(admin.ModelAdmin):
-#    list_display = ('film_id', 'category')
+@admin.register(Product)
+class ProductAdminPanel(admin.ModelAdmin):
+    list_display = ('title', 'price')
+
+@admin.register(Photo_product)
+class PhotoProductAdminPanel(admin.ModelAdmin):
+    list_display = ('product', 'photo')

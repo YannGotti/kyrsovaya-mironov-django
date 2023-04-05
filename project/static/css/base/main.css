@@ -10,9 +10,19 @@
     font-weight: 600;
 }
 
+.text-h2{
+    font-size: 15px;
+    font-weight: 700;
+}
+
 .text-h3{
     font-size: 13px;
     font-weight: 600;
+}
+
+.form-text{
+    font-size: 13px;
+    font-weight: 700;
 }
 
 .text-button{
