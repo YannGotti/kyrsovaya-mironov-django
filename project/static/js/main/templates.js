@@ -1,8 +1,5 @@
 
 function AddDivProduct(data){
-
-    console.log(data.photos);
-
     let photo = data.photos[0];
 
     
@@ -46,7 +43,7 @@ function AddDivProduct(data){
 
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
-                    <button type="button" class="btn btn-dark text-button">Изменить товар</button>
+                    <button type="button" class="btn btn-dark text-button">Изменить</button>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class Product(models.Model):
     availability = models.BooleanField('Есть ли товар?', default=True)
     count = models.BigIntegerField('Кол-во товара', default=0, null=True)
     date_create = models.DateField('Дата добавления', auto_now=True)
-    articul = models.IntegerField('Артикул')
+    articul = models.CharField('Артикул', max_length=100)
 
     def __str__(self):
         return f'{self.title}, {self.description}, {self.type}, {self.availability}'

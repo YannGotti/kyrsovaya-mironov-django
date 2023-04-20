@@ -11,7 +11,6 @@ function selectAllProducts(){
         url: '/api/v.1/selectTasks/all/',
         method: 'get',
         success: function(data){
-            console.log(data);
 
             for (const product of data) {
                 AddDivProduct(product);
@@ -28,6 +27,47 @@ function selectAllProducts(){
 function createProduct(){
     let form = document.getElementById('form_create_product');
     let file_loader = document.getElementById('file_loader');
+
+
+    if (form.title.value.length == 0 || form.title.value.length > 100){
+        CallToastPanel('Имя товара не может быть пустым или больше 100 символов!');
+        return;
+    }
+
+    if (form.description.value.length == 0){
+        CallToastPanel('Описание товара не может быть пустым!');
+        return;
+    }
+
+    let price = parseFloat(form.price.value);
+
+    if (!price){
+        CallToastPanel('Цена не является числом!');
+        return;
+    }
+
+    if (form.type.value.length == 0 || form.type.value.length > 50){
+        CallToastPanel('Тип товара не может быть пустым или больше 50!');
+        return;
+    }
+
+    let count = parseFloat(form.count.value);
+
+    if (!count){
+        CallToastPanel('Количество товаров не является числом!');
+        return;
+    }
+
+    if (form.articul.value.length == 0 || form.articul.value.length > 100){
+        CallToastPanel('Артикул товара не может быть пустым или больше 100 символов!');
+        return;
+    }
+
+    if(!file_loader.files[0]){
+        CallToastPanel('Файл с фото товара не прикреплен!');
+        return;
+    }
+
 
     let formData = new FormData();
     formData.append('title', form.title.value);
