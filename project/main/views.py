@@ -17,10 +17,18 @@ class MainPage(View):
         
         return render(request, 'main/index.html')
     
-class SelectAllProducts(APIView):
+class SelectProducts(APIView):
     def get(self, request):
+        values = request.GET
+                               
+        type = values.get('type')
         data = []
-        products =  Product.objects.all()      
+
+        if (type == "all"):
+            products =  Product.objects.all()     
+        else :
+            products =  Product.objects.filter(type=type)     
+
 
         for product in products:
             photos = Photo_product.objects.filter(product=product)
@@ -36,7 +44,18 @@ class SelectAllProducts(APIView):
             data.append(info)
 
         return JsonResponse(data, safe=False)
-        
+
+class GetCountProducts(APIView):
+    def get(self, request):
+        values = request.GET
+        type = values.get('type')
+        if (type == "all"):
+            products =  Product.objects.all().count()  
+        else :
+            products =  Product.objects.filter(type=type).count()
+
+        return JsonResponse(products, safe=False)
+
 class CreateProduct(APIView):
     def post(self, request):
         if request.method == 'POST' and request.FILES['file']:
@@ -51,7 +70,7 @@ class CreateProduct(APIView):
                 price=Money(float(data.get('price')), 'RUB'),
                 type=data.get('type'),
                 count=int(data.get('count')),
-                articul=int(data.get('articul'))
+                articul=data.get('articul')
                 )
             product.save()
 

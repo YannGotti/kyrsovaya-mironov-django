@@ -5,22 +5,20 @@
 
 
 <section>
-    <div class="container">
+    <div class="container animate__animated animate__fadeIn">
         <div class="row d-flex justify-content-center">
-            <div class="col-12 col-lg-6">
+
+            <div class="col-12 col-lg-6" id="productsDiv">
 
                 
 
                 <div class="row d-flex justify-content-start">
                     <div class="col-3">
                         <div class="dropdown">
-                            <button class="btn btn-dark dropdown-toggle text-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Фильтры
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item text-button" href="#">Мыши</a></li>
-                              <li><a class="dropdown-item text-button" href="#">Персональные пк</a></li>
-                              <li><a class="dropdown-item text-button" href="#">Клавиатуры</a></li>
+                            <button class="btn btn-dark dropdown-toggle text-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="filterButton">Все товары</button>
+                            <ul class="dropdown-menu" id="filterTypes" style="max-height: 300px; overflow-y: scroll;">
+                                <!-- Глобальный поиск -->
+                                <li><a class="dropdown-item text-button" onclick="getFilterProducts('all')" href="#">Все товары</a></li>
                             </ul>
                           </div>
                     </div>
@@ -39,6 +37,7 @@
     
                 </div>
             </div>
+
                 
             <div class="col-12 col-lg-6">
 
@@ -64,7 +63,13 @@
                                     <input name="price" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
     
                                     <label for="exampleInputEmail1" class="form-label text-h3">Тип товара</label>
-                                    <input name="type" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input name="type" type="text" class="form-control text-h3" id="inputTypes" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                    <div class="dropdown">
+                                        <ul class="dropdown-menu" aria-labelledby="inputTypes" id="listTypes" style="max-height: 300px; overflow-y: scroll;">
+                                            <!-- размещение типов комп техники -->
+                                        </ul>
+                                    </div>
     
                                     <label for="exampleInputEmail1" class="form-label text-h3">Количество товара</label>
                                     <input name="count" type="text" class="form-control text-h3" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -125,6 +130,8 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'js/main/constData.js' %}"></script>
 <script src="{% static 'js/main/templates.js' %}"></script>
+<script src="{% static 'js/main/filter.js' %}"></script>
 
 {% endblock %}

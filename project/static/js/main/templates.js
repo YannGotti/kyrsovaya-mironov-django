@@ -1,5 +1,5 @@
 
-function AddDivProduct(data){
+function AddDivProduct(data, product_list){
     let photo = data.photos[0];
 
     
@@ -8,11 +8,9 @@ function AddDivProduct(data){
     let id = product.pk;
     let fields = product.fields;
 
-    let product_list = document.getElementById('product_list');
-
     product_list.innerHTML +=
     `
-    <div class="row d-flex justify-content-center mt-3 shadow p-1" style="border-radius: 10px;">
+    <div class="row d-flex justify-content-center mt-3 shadow p-1 animate__animated animate__fadeIn" style="border-radius: 10px;">
         <div class="col-3">
             <a href="#"><img src="/media/product_photos/` + photo + `" width="100%" alt=""></a>
         </div>
@@ -50,4 +48,37 @@ function AddDivProduct(data){
     </div>
     `
 
+}
+
+function AddDivListType(){
+    let listTypes = document.getElementById('listTypes');
+
+    for (const type of TYPES_LIST) {
+
+    listTypes.innerHTML +=
+    `<li><a class="dropdown-item text-h3" onclick="insertTypeForInput('` + type + `')" href="#">` + type + `</a></li>`
+
+    }
+}
+
+function AddDivFilterTypes(){
+    let filterTypes = document.getElementById('filterTypes');
+
+    for (const type of TYPES_LIST) {
+
+    filterTypes.innerHTML +=
+    `<li><a class="dropdown-item text-button" onclick="getFilterProducts('` + type + `')" href="#">` + type + `</a></li>`
+
+    }
+}
+
+function checkDisableProductsDiv(count){
+    let productsDiv = document.getElementById('productsDiv');
+
+    if (count == 0){
+        productsDiv.style.display = "none";
+        return;   
+    }
+    
+    productsDiv.style.display = "block";
 }

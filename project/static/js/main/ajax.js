@@ -1,19 +1,45 @@
 
 
 function InitMainPage(){
-    selectAllProducts();
+    selectProducts();
+    AddDivListType();
+    AddDivFilterTypes();
+    setCookieFilterType("all");
 }
 
 InitMainPage();
 
-function selectAllProducts(){
+function getCountProducts(type = "all"){
+    let count;
+
     $.ajax({
-        url: '/api/v.1/selectTasks/all/',
+        url: '/api/v.1/getCountProducts/?type=' + type,
+        method: 'get',
+        async: false,
+        success: function(data){
+            count = data;
+        },
+        error: function (jqXHR, exception) {
+            return;
+        }
+    });
+
+    return count;
+}
+
+function selectProducts(type = "all"){
+
+    checkDisableProductsDiv(getCountProducts());
+
+    $.ajax({
+        url: '/api/v.1/selectTasks/?type='+ type,
         method: 'get',
         success: function(data){
+            let product_list = document.getElementById('product_list');
+            product_list.innerHTML = ``;
 
             for (const product of data) {
-                AddDivProduct(product);
+                AddDivProduct(product, product_list);
             }
 
             setCurrentCountProduct("Всего товара - " + data.length);
@@ -96,8 +122,15 @@ function createProduct(){
             }
         },
         success: function(data){
-            console.log(data[0]);
-            AddDivProduct(data[0]);
+            let product_list = document.getElementById('product_list');
+
+            if (readCookie() == "all" || readCookie() == form.type.value){
+                AddDivProduct(data[0], product_list);
+            }
+            else{
+                getFilterProducts(form.type.value);
+            }
+            checkDisableProductsDiv(getCountProducts());
             CallToastPanel('Продукт добавлен!');
         },
         error: function (jqXHR, exception) {
