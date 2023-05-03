@@ -1,8 +1,15 @@
 
 
 function InitMainPage(){
-    selectProducts();
+
     AddDivListType();
+
+    try{
+        selectProducts();
+    }
+    catch{
+        return;
+    }
     AddDivFilterTypes();
     setCookieFilterType("all");
 }
@@ -132,6 +139,84 @@ function createProduct(){
             }
             checkDisableProductsDiv(getCountProducts());
             CallToastPanel('Продукт добавлен!');
+        },
+        error: function (jqXHR, exception) {
+            return;
+        }
+    });
+}
+
+
+function editProduct(id, json){
+    let form = document.getElementById('form_edit_product');
+    if (form.title.value.length == 0 || form.title.value.length > 100){
+        CallToastPanel('Имя товара не может быть пустым или больше 100 символов!');
+        return;
+    }
+
+    if (form.description.value.length == 0){
+        CallToastPanel('Описание товара не может быть пустым!');
+        return;
+    }
+
+    let price = parseFloat(form.price.value);
+
+
+    if (!price){
+        CallToastPanel('Цена не является числом!');
+        return;
+    }
+
+    price = form.price.value;
+    
+    if (form.type.value.length == 0 || form.type.value.length > 50){
+        CallToastPanel('Тип товара не может быть пустым или больше 50!');
+        return;
+    }
+
+    let count = parseFloat(form.count.value);
+
+    if (!count){
+        CallToastPanel('Количество товаров не является числом!');
+        return;
+    }
+
+    if (form.articul.value.length == 0 || form.articul.value.length > 100){
+        CallToastPanel('Артикул товара не может быть пустым или больше 100 символов!');
+        return;
+    }
+
+
+
+
+    let formData = new FormData();
+    formData.append('id', id);
+    formData.append('title', form.title.value);
+    formData.append('description', form.description.value);
+    formData.append('price', price);
+    formData.append('type', form.type.value);
+    formData.append('count', form.count.value);
+    formData.append('articul', form.articul.value);
+    formData.append('parametrs', json);
+
+    let csrftoken = getCookie('csrftoken');
+
+
+    $.ajax({
+        url: '/api/v.1/editProduct/',
+        method: 'post',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function(data){
+            CallToastPanel('Продукт обновлен!');
         },
         error: function (jqXHR, exception) {
             return;

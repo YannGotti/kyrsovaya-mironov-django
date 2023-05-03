@@ -17,6 +17,28 @@ class MainPage(View):
         
         return render(request, 'main/index.html')
     
+class ProductPage(APIView):
+    def get(self, request, pk):
+
+        product = Product.objects.get(id=pk)
+        photos = Photo_product.objects.filter(product=product)
+        photo = photos[0]
+
+        array = []
+
+        for photo in photos:
+            array.append(photo)
+        array.pop(0)
+
+        data = {
+            'product' : product,
+            'photo' : photo,
+            'photos' : array,
+            'params_json': json.dumps(product.parametrs)
+        }
+        
+        return render(request, 'main/product.html', context=data)
+    
 class SelectProducts(APIView):
     def get(self, request):
         values = request.GET
@@ -67,7 +89,7 @@ class CreateProduct(APIView):
             product = Product(
                 title=data.get('title'),
                 description=data.get('description'), 
-                price=Money(float(data.get('price')), 'RUB'),
+                price=Money(float(parseToMoney(data.get('price'))), 'RUB'),
                 type=data.get('type'),
                 count=int(data.get('count')),
                 articul=data.get('articul')
@@ -90,3 +112,36 @@ class CreateProduct(APIView):
             data.append(info)
 
             return JsonResponse(data, safe=False)
+        
+class EditProduct(APIView):
+    def post(self, request):
+        if request.method == 'POST':
+            data = request.POST
+
+            product = Product.objects.get(id=int(data.get('id')))
+            product.title = data.get('title')
+            product.description = data.get('description')
+            product.price = Money(float(parseToMoney(data.get('price'))), 'RUB')
+            product.type = data.get('type')
+            product.count = int(data.get('count'))
+            product.articul = data.get('articul')
+            product.parametrs = json.loads(data.get('parametrs'))
+
+            product.save()
+
+        return JsonResponse("ok", safe=False)
+    
+
+def parseToMoney(value):
+    isDecimal = False
+    money = ''
+    for i in value:
+        if i == '1' or i == '2' or i == '3' or i == '4' or i == '5' or i == '6'or i == '7' or i == '8' or i == '9' or i == '0':
+            money += i
+        if i == ',':
+            isDecimal = True
+    
+    if isDecimal:
+        return money[:-2]
+    else:
+        return money

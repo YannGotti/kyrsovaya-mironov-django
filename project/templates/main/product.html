@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.4/jsoneditor.min.css" />
+
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="carouselExample" class="carousel slide p-2">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/media/product_photos/{{ photo.photo }}" class="d-block w-100 img-fluid" style="width: 500px; height: 500px; border-radius: 10px;">
+              </div>
+              
+                {% if photos %}
+                    {% for photo in photos %}
+                    <div class="carousel-item">
+                    <img src="/media/product_photos/{{ photo.photo }}" class="d-block w-100 img-fluid" style="width: 500px; height: 500px; border-radius: 10px;">
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+                
+
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+      </div>
+      <div class="col-md-6">
+
+        <form id="form_edit_product">
+            <p class="lead my-4  text-h2">Название товара</p>
+            <input name="title" id="inputTitle" class="mb-3 form-control custom-form text-h3" value="{{ product.title }}">
+    
+            <p class="lead my-4  text-h2">Тип товара</p>
+            <input name="type" type="text" class="form-control custom-form text-h3" value="{{ product.type }}" id="inputTypes" data-bs-toggle="dropdown" aria-expanded="false">
+    
+            <div class="dropdown">
+                <ul class="dropdown-menu" aria-labelledby="inputTypes" id="listTypes" style="max-height: 300px; overflow-y: scroll;">
+                    <!-- размещение типов комп техники -->
+                </ul>
+            </div>
+    
+            <p class="lead my-4  text-h2">Количество товара</p>
+            <input name="count" type="text" class="form-control custom-form text-h3" value="{{ product.count }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+            <p class="lead my-4  text-h2">Артикул товара</p>
+            <input name="articul" type="text" class="form-control custom-form text-h3" id="exampleInputEmail1" value="{{ product.articul }}">
+    
+            <p class="font-weight-bold my-2 text-h2">Цена:</p>
+            <input name="price" class="mb-2 form-control custom-form text-h3" value="{{ product.price }}">
+    
+            <p class="lead my-4  text-h2">Описание товара</p>
+            <textarea name="description" class="form-control mb-3 custom-form text-h3" rows="3">{{ product.description }}</textarea>
+
+            
+        </form>
+        
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-2 mb-3 animate__animated animate__fadeIn">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <h3 class="mb-3  text-h2">Характеристики товара</h3>
+                <div id="jsoneditor"></div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-end">
+            <div class="col-1">
+                <button id="submit-button" class="btn btn-dark mt-3">Сохранить</button>
+            </div>
+        </div>
+  </div>
+
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+        <img src="{% static 'image/base/logo.svg' %}" class="rounded me-2" width="15px">
+        <strong class="me-auto text-h3">YION</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-h3" id="toast_content">
+        
+        </div>
+    </div>
+</div>
+
+  
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.4/jsoneditor.min.js"></script>
+<script src="{% static 'js/main/jsonEditor.js' %}"></script>
+<script src="{% static 'js/main/constData.js' %}"></script>
+<script src="{% static 'js/main/templates.js' %}"></script>
+<script src="{% static 'js/main/filter.js' %}"></script>
+
+<script  type='text/javascript'>
+    createJsonParser('{{product.id}}', '{{params_json|safe}}');
+</script>
+
+{% endblock %}

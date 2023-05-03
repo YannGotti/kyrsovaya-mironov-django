@@ -10,15 +10,15 @@ function AddDivProduct(data, product_list){
 
     product_list.innerHTML +=
     `
-    <div class="row d-flex justify-content-center mt-3 shadow p-1 animate__animated animate__fadeIn" style="border-radius: 10px;">
+    <div class="row d-flex justify-content-center shadow p-1 animate__animated animate__fadeIn pt-3 pb-3" style="border-radius: 10px;">
         <div class="col-3">
-            <a href="#"><img src="/media/product_photos/` + photo + `" width="100%" alt=""></a>
+            <a href="#"><img style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;" src="/media/product_photos/` + photo + `" width="140px" height="100px" alt=""></a>
         </div>
 
         <div class="col-6">
             <div class="row">
                 <div class="col-12">
-                    <a href="#" class="text-a wrap text-dark">` + fields.title + `</a>
+                    <a href="/product/` + id + `/" class="text-a wrap text-dark">` + fields.title + `</a>
                 </div>
             </div>
 
@@ -27,12 +27,13 @@ function AddDivProduct(data, product_list){
                     <h3 class="text-h3">В наличии: ` + fields.count + `</h3>
                 </div>
                 <div class="col-6">
-                    <h3 class="text-h3">Артикул: <a href="#">` + fields.articul + `</a></h3>
+                    <h3 class="text-h3"  onclick="document.getElementById('articul_` + fields.articul + `').select();document.execCommand('copy');">Артикул: <a href="#">` + fields.articul + `</a></h3>
+                    <input type="hidden" id="articul_` + fields.articul + `" value="` + fields.articul + `">
                 </div>
             </div>
         </div>
 
-        <div class="col-3">
+        <div class="col-3 ">
             <div class="row d-flex justify-content-start mt-2">
                 <div class="col-12">
                     <h3 class="text-h1 text-dark text-center">` + fields.price + `р</h3>
@@ -41,7 +42,7 @@ function AddDivProduct(data, product_list){
 
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
-                    <button type="button" class="btn btn-dark text-button">Изменить</button>
+                    <a href="/product/` + id + `/" type="button" class="btn btn-outline-dark text-button">Изменить</a>
                 </div>
             </div>
         </div>
