@@ -28,7 +28,7 @@ class ProductPage(APIView):
 
         for photo in photos:
             array.append(photo)
-        array.pop(0)
+        array.pop()
 
         data = {
             'product' : product,
@@ -131,6 +131,23 @@ class EditProduct(APIView):
 
         return JsonResponse("ok", safe=False)
     
+
+class AddPhoto(APIView):
+    def post(self, request):
+        if request.method == 'POST' and request.FILES['file']:
+            data = request.POST
+            filename = ''
+            image = request.FILES['file']
+
+            fss = FileSystemStorage(location='media/product_photos/')
+            file = fss.save(image.name, image)
+            id_product = request.POST.get('id')
+            product = Product.objects.get(id = id_product)
+
+            fileTaskModel = Photo_product(product = product, photo = file)
+            fileTaskModel.save()
+            return JsonResponse("ok", safe=False)
+
 
 def parseToMoney(value):
     isDecimal = False

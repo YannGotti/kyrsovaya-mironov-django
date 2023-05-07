@@ -34,6 +34,37 @@ function getCountProducts(type = "all"){
     return count;
 }
 
+
+function addImage(id, image){
+    let csrftoken = getCookie('csrftoken');
+
+    let formData = new FormData();
+    formData.append('id', id);
+    formData.append('file', image.files[0]);
+
+    $.ajax({
+        url: '/api/v.1/addPhoto/',
+        method: 'post',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function(data){
+            location.reload();
+        },
+        error: function (jqXHR, exception) {
+            return;
+        }
+    });
+}
+
 function selectProducts(type = "all"){
 
     checkDisableProductsDiv(getCountProducts());
