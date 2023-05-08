@@ -113,6 +113,12 @@ class CreateProduct(APIView):
 
             return JsonResponse(data, safe=False)
         
+
+class DeleteProduct(APIView):
+    def get(self, request, pk):
+        product = Product.objects.get(id=pk)
+        product.delete()
+        return redirect('/')
 class EditProduct(APIView):
     def post(self, request):
         if request.method == 'POST':
